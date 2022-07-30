@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="ru" dir="ltr">
+
+
+{% load static %}
+
+<head>
+    <meta charset="utf-8"/>
+    <!-- Только CSS -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+    <link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+
+</head>
+<body>
+<!-- -->
+
+    <header class="p-3 text-bg-dark header_border">
+        <div class="container">
+          <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+            <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+              <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg>
+            </a>
+
+            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+              <li><a href="/" class="nav-link px-2 text-secondary">Главная</a></li>
+              <li><a href="#" class="nav-link px-2 text-white">Архив</a></li>
+            </ul>
+
+            <div class="text-end">
+                {{ username }}
+            </div>
+          </div>
+        </div>
+      </header>
+    <div class="container container-body">
+        <div class="wrap first-wrap">
+            <div class="acc_head">Мои задачи</div>
+            <div class="acc_body">
+                <div class="row">
+                  <div class="col-sm-3 col-sm-local-first">
+                    <div class="tasks__list1" id='tasks__list1'>
+                      <div class="title_board">
+                        <div class="row row-title-board">
+                          <div class="col-sm-9 col-title-board">
+                            Сделать
+                          </div>
+                          <div class="col-sm-3">
+                            <a href="#" class='modal-new-task'  data-tasks="tasks__list1" data-id='board_1' data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
+                              <img class='btn_add_tasks' src="{% static '/img/add.svg' %}" alt=""></a>
+                          </div>
+                        </div>
+                      </div>
+                      {% if tasks1 %}
+                      {% for task1 in tasks1 %}
+                      <div class="col-sm col-sm-card task tasks__item" id='task_id__{{task1.id}}' draggable="true">
+                        {{ task1.title }}
+                      </div>
+                      {% endfor %}
+                      {% else %}
+                      <div class="col-sm col-sm-card task tasks__item" id='NewElement' draggable="true">
+                      Задач в данной категории нет...
+                      </div>
+                      {% endif %}
+                    </div>
+                  </div>
+                  <div class="col-sm-3 col-sm-local">
+                    <div class="tasks__list2" id="tasks__list2">
+                      <div class="title_board">
+                        <div class="row row-title-board">
+                          <div class="col-sm-9 col-title-board">
+                            Задачи на сегодня
+                          </div>
+                          <div class="col-sm-3">
+                            <a href="#" class='modal-new-task'  data-tasks="tasks__list2" data-id='board_2' data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
+                            <img class='btn_add_tasks' src="{% static '/img/add.svg' %}" alt=""></a>
+                          </div>
+                        </div>
+                      </div>
+
+                      {% if tasks2 %}
+                      {% for task2 in tasks2 %}
+                      <div class="col-sm col-sm-card task tasks__item" id='task_id__{{task2.id}}' draggable="true">
+                        {{ task2.title }}
+                      </div>
+                      {% endfor %}
+                      {% else %}
+                      <div class="col-sm col-sm-card task tasks__item" id='NewElement' draggable="true">
+                      Задач в данной категории нет...
+                      </div>
+                      {% endif %}
+                    </div>
+                  </div>
+                  <div class="col-sm-3 col-sm-local">
+                    <div class="tasks__list3" id="tasks__list3">
+                      <div class="title_board">
+                        <div class="row row-title-board">
+                          <div class="col-sm-9 col-title-board">
+                            В работе
+                          </div>
+                          <div class="col-sm-3">
+                            <a href="#" class='modal-new-task'  data-tasks="tasks__list3" data-id='board_3' data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
+                              <img class='btn_add_tasks' src="{% static '/img/add.svg' %}" alt=""></a>
+                          </div>
+                        </div>
+                      </div>
+                      {% if tasks3 %}
+                      {% for task3 in tasks3 %}
+                      <div class="col-sm col-sm-card task tasks__item" id='task_id__{{task3.id}}' draggable="true">
+                        {{ task3.title }}
+                      </div>
+                      {% endfor %}
+                      {% else %}
+                      <div class="col-sm col-sm-card task tasks__item" id='NewElement' draggable="true">
+                      Задач в данной категории нет...
+                      </div>
+                      {% endif %}
+                    </div>
+                  </div>
+                  <div class="col-sm-3 col-sm-local-last">
+                    <div class="tasks__list4" id="tasks__list4">
+                      <div class="title_board">
+                        <div class="row row-title-board">
+                          <div class="col-sm-9 col-title-board">
+                            Выполнено
+                          </div>
+                          <div class="col-sm-3">
+                            <a href="#" class='modal-new-task'  data-tasks="tasks__list4" data-id='board_4' data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
+                              <img class='btn_add_tasks' src="{% static '/img/add.svg' %}" alt=""></a>
+                          </div>
+                        </div>
+                      </div>
+                      {% if tasks4 %}
+                      {% for task4 in tasks4 %}
+                      <div class="col-sm col-sm-card task tasks__item" id='task_id__{{task4.id}}' draggable="true">
+                        {{ task4.title }}
+                      </div>
+                      {% endfor %}
+                      {% else %}
+                      <div class="col-sm col-sm-card task tasks__item" id='NewElement' draggable="true">
+                      Задач в данной категории нет...
+                      </div>
+                      {% endif %}
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+        <div id="basket">
+          <img src="{% static 'img/del.svg' %}" alt="">
+        </div>
+    </div>
+
+
+
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Добавить новую задачу</h5>
+      </div>
+      <div class="modal-body">
+        <form class="new_task_form" name="new_task_form" id="new_task_form" method="post" style="width: 450px;">
+          <textarea name="new_task" class="input-xlarge" id='text_area' style="height: 120px; width: 450px; margin-bottom: 20px;"></textarea>
+          <input name="boardID" class="input-xlarge" id='boardID' hidden='true'>
+          <input name="boardID" class="input-xlarge" id='task_list' hidden='true'>
+          <br>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+          <button type="submit" class="btn btn-primary" >Сохранить</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="{% static 'js/main.js' %}"></script>
+
+<script type="text/javascript">
+
+    $('.acc_head').on('click',function(){
+        $(this).siblings('.acc_body').slideToggle();
+    })
+
+</script>
+
+<script type="text/javascript">
+  function send_data(json) {
+          $.ajax({
+              method: "POST",
+              url: "http://127.0.0.1:8000/",
+              data: {
+                'json' : json,
+                csrfmiddlewaretoken : '{{ csrf_token }}',
+              },
+              success: function(data){
+                  //alert('Задача успешно перемещена');
+              }
+          });
+  };
+</script>
+
+<script type="text/javascript">
+  function send_data1(activeElement) {
+          $.ajax({
+              method: "POST",
+              url: "http://127.0.0.1:8000/delete_task/",
+              data: {
+                'task_id' : activeElement.id,
+                csrfmiddlewaretoken : '{{ csrf_token }}',
+              },
+              success: function(data){
+                const data_from_delete_url = JSON.parse(data);
+                if (activeElement.id == data_from_delete_url['task_id']){
+                  activeElement.remove();
+                };
+              }
+          });
+  };
+</script>
+
+<script type="text/javascript">
+  $(document).on("click", ".modal-new-task", function () {
+     var boardID = $(this).data('id');
+     var task_list = $(this).data('tasks');
+     document.getElementById('boardID').value = boardID;
+     document.getElementById('task_list').value = task_list;
+});
+</script>
+
+<script>
+    $(function(){
+        $('#new_task_form').on('submit', function(e){
+            e.preventDefault();
+            $.ajax({
+                url: '/create_new_task/',
+                type: 'POST',
+                data: {
+                  'tasks' : `.${document.forms[this.id].elements["task_list"].value}`,
+                  'form_id' : document.forms[this.id].elements["boardID"].value,
+                  'new_task' : document.forms[this.id].elements["new_task"].value,
+                  csrfmiddlewaretoken : '{{ csrf_token }}',
+                },
+                success: function(data){
+                     document.getElementById('new_task_form').reset();
+                     $(".modal").modal('hide');
+                     let new_task = document.createElement('div');
+                     let t = JSON.parse(data);
+                     new_task.classList.add('col-sm', 'col-sm-card', 'tasks__item', 'task');
+                     new_task.id = `task_id__${t['task_id']}`;
+                     new_task.innerHTML = `${t['task_title']}`;
+                     new_task.draggable = true;
+                     const task__list_id = t['tasks'];
+                     document.querySelector(`${task__list_id}`).append(new_task);
+                     dragDrop(new_task);
+                }
+            });
+        });
+    });
+</script>
+
+</body>
+</html>
